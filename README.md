@@ -10,6 +10,7 @@ The blue square is using transition: width, height and width. It affects the per
 
 - Clone the repo and serve the index.html:
 ```sh
+$ git clone git@github.com:JCVV/FlipTransitionDemo.git
 $ cd flip
 $ python -m SimpleHTTPServer
 ```
