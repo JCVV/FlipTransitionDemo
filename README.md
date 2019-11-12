@@ -8,7 +8,7 @@ The blue square is using transition: width, height and width. It affects the per
 
 ## Usage:
 
-- Clone the repo and serve the index.html:
+- Clone the repo and serve the index.html or just open https://jcvv.github.io/FlipTransitionDemo 
 ```sh
 $ git clone git@github.com:JCVV/FlipTransitionDemo.git
 $ cd flip
