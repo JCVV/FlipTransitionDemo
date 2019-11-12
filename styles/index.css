@@ -1,0 +1,34 @@
+.compositionSquare, .layoutSquare {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    transform-origin: 'top left';
+}
+
+.compositionSquare.final-position {
+    left: 500px;
+    top: 500px;
+    width: 350px;
+    height: 350px;
+}
+
+.layoutSquare {
+    background-color: blue;
+    top: 500px;
+    left: 30px;
+    transition: width 2s linear, height 2s linear, left 2s linear, top 2s linear;
+}
+
+.layoutSquare.final-position {
+    left: 500px;
+    top: 30px;
+    width: 350px;
+    height: 350px;
+}
+
+.compositionSquare.animated{
+    transition: transform 2s linear;
+}
