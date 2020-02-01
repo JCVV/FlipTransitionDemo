@@ -1,42 +1,68 @@
 window.addEventListener('load', start);
 
 function start() {
-    animateElement2();
-    animateElement();
+    setListeners();
+
+    animateCompositionSquare();
+    animateLayoutSquare();
+
     expensiveTask();
 }
 
-const element = document.querySelector(".compositionSquare");
-const element2 = document.querySelector(".layoutSquare");
+function setListeners() {
+    compositionSquare.addEventListener("transitionend", function() {
+        window.requestAnimationFrame(() => {
+            animateCompositionSquare();
+            expensiveTask();
+        });
+    });
 
-function animateElement() {
-    const initial = element.getBoundingClientRect();
+    layoutSquare.addEventListener("transitionend", function(transition) {
+        if (transition.propertyName === "top") {
+            window.requestAnimationFrame(() => {
+                animateLayoutSquare();
+            });
+        }
+    })
+}
 
-    console.log(initial);
+const compositionSquare = document.querySelector(".compositionSquare");
+const layoutSquare = document.querySelector(".layoutSquare");
 
-    element.classList.add("final-position");
+function animateCompositionSquare() {
+    compositionSquare.classList.remove("animated");
+    const initial = compositionSquare.getBoundingClientRect();
 
-    const final = element.getBoundingClientRect();
+    if (compositionSquare.classList.contains("final-position")) {
+        compositionSquare.classList.remove("final-position");
+    } else {
+        compositionSquare.classList.add("final-position");
+    }
 
-    console.log(final);
+    const final = compositionSquare.getBoundingClientRect();
 
     const leftDiff = initial.left - final.left;
     const topDiff = initial.top - final.top;
     const widthDiff = initial.width / final.width;
     const heightDiff = initial.height / final.height;
 
-    element.style.transformOrigin = 'top left';
-    element.style.transform = 'translate(' + leftDiff + 'px, ' + topDiff + 'px) scale(' + widthDiff + ', ' + heightDiff + ')';
+    compositionSquare.style.transformOrigin = 'top left';
+    compositionSquare.style.transform = 'translate(' + leftDiff + 'px, '
+        + topDiff + 'px) scale(' + widthDiff + ', ' + heightDiff + ')';
 
     window.requestAnimationFrame(() => {
-        element.classList.add("animated");
+        compositionSquare.classList.add("animated");
 
-        element.style.transform = '';
+        compositionSquare.style.transform = '';
     });
 };
 
-function animateElement2() {
-    element2.classList.add("final-position");
+function animateLayoutSquare() {
+    if (layoutSquare.classList.contains("final-position")) {
+        layoutSquare.classList.remove("final-position");
+    } else {
+        layoutSquare.classList.add("final-position");
+    }
 }
 
 function expensiveTask() {
